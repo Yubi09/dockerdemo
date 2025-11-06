@@ -19,8 +19,10 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
-                        sh 'docker login -u yubaraj.das.cse26@heritageit.edu.in -p ${docker_hub}'
-                        sh 'docker push dockernewbie09/learning'
+                        sh """
+                            echo "${docker_hub}" | docker login -u dockernewbie09 --password-stdin
+                            docker push dockernewbie09/learning
+                        """
                     }
                 }
             }
