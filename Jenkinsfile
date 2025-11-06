@@ -10,8 +10,8 @@ pipeline {
         stage('Build and Tag Docker Image') {
             steps {
                 script {
-                    sh 'docker build . -t hellodocker'
-                    sh 'docker tag hellodocker dockernewbie09/learning'
+                    sh 'sudo docker build . -t hellodocker'
+                    sh 'sudo docker tag hellodocker dockernewbie09/learning'
                 }
             }
         }    
@@ -29,7 +29,7 @@ pipeline {
         stage('Deploy deployment and service file') {
             steps {
                 script {
-                    kubernetesDeploy configs: 'deploymentsvc.yaml', kubeConfig: [path: ''], kubeconfigId: 'k8_auth', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+                    kubernetesDeploy configs: 'deploymentsvc.yaml', kubeconfigId: 'k8_auth'
                 }
             }
         } 
