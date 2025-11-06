@@ -10,8 +10,8 @@ pipeline {
         stage('Build and Tag Docker Image') {
             steps {
                 script {
-                    sh 'sudo docker build . -t hellodocker'
-                    sh 'sudo docker tag hellodocker dockernewbie09/learning'
+                    sh 'docker build . -t hellodocker'
+                    sh 'docker tag hellodocker dockernewbie09/learning'
                 }
             }
         }    
@@ -19,7 +19,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'docker_hub', variable: 'docker_hub')]) {
-                        sh """docker login yubaraj.das.cse26@heritageit.edu.in -p ${docker_hub}"""
+                        sh 'docker login -u yubaraj.das.cse26@heritageit.edu.in -p ${docker_hub}'
                         sh 'docker push dockernewbie09/learning'
                     }
                 }
